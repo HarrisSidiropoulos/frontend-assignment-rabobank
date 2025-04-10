@@ -3,7 +3,6 @@ import type {
   GroupedTransactions,
   Transaction,
 } from './transaction-timeline.model';
-import { CurrencyService } from './currency.service';
 import { TransactionService } from './transaction.service';
 import { NgFor } from '@angular/common';
 
@@ -19,24 +18,12 @@ export class TransactionTimelineComponent implements OnInit {
 
   transactions: Transaction[] = [];
   loading = true;
-  currencyService = inject(CurrencyService);
   transactionService = inject(TransactionService);
 
   groupedTransactions: GroupedTransactions[] = [];
 
   ngOnInit(): void {
     this.loading = true;
-
-    this.currencyService.getUsdToEurRate().subscribe({
-      next: (rate) => {
-        this.usdToEurRate = rate;
-        console.log('USD to EUR rate:', rate);
-      },
-      error: (e) => {
-        console.log('error', e);
-        // handle error
-      },
-    });
 
     this.transactionService.getAllTransactions().subscribe({
       next: (txs) => {
@@ -58,7 +45,9 @@ export class TransactionTimelineComponent implements OnInit {
     this.transactions.forEach((tx) => {
       const date = new Date(tx.timestamp).toDateString();
       const amountInEur =
-        tx.currencyCode === 'EUR' ? tx.amount : tx.amount * this.usdToEurRate;
+        tx.currencyCode === 'EUR'
+          ? tx.amount
+          : tx.amount * (tx.currencyRate ?? 1);
 
       if (!grouped.has(date)) {
         grouped.set(date, []);
