@@ -1,6 +1,6 @@
 <div class="timeline">
   <div *ngFor="let group of groupedTransactions" class="timeline-group">
-    <div class="timeline-date">{{ group.date }}</div>
+    <div class="timeline-date">{{ group.date | date : 'fullDate' }}</div>
     <div *ngFor="let tx of group.transactions" class="timeline-item">
       <span class="party-name">{{ tx.name }}</span>
       <span class="amount">€{{ tx.amountInEur }}</span>

@@ -4,14 +4,14 @@ import type {
   Transaction,
 } from './transaction-timeline.model';
 import { TransactionService } from './transaction.service';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-timeline',
   templateUrl: './transaction-timeline.component.html',
   styleUrls: ['./transaction-timeline.component.scss'],
   providers: [TransactionService],
-  imports: [NgFor],
+  imports: [NgFor, CommonModule],
 })
 export class TransactionTimelineComponent implements OnInit {
   @Input() usdToEurRate = 0.9;
@@ -34,7 +34,6 @@ export class TransactionTimelineComponent implements OnInit {
       error: (e) => {
         console.log('error', e);
         this.loading = false;
-        // handle error
       },
     });
   }
@@ -43,7 +42,7 @@ export class TransactionTimelineComponent implements OnInit {
     const grouped = new Map<string, { name: string; amountInEur: number }[]>();
 
     this.transactions.forEach((tx) => {
-      const date = new Date(tx.timestamp).toDateString();
+      const date = new Date(tx.timestamp).toISOString();
       const amountInEur =
         tx.currencyCode === 'EUR'
           ? tx.amount
