@@ -1,5 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import type {
+  GroupedTransaction,
   GroupedTransactions,
   Transaction,
 } from './transaction-timeline.model';
@@ -39,7 +40,7 @@ export class TransactionTimelineComponent implements OnInit {
   }
 
   private groupAndSortTransactions(): void {
-    const grouped = new Map<string, { name: string; amountInEur: number }[]>();
+    const grouped = new Map<string, GroupedTransaction[]>();
 
     this.transactions.forEach((tx) => {
       const date = new Date(tx.timestamp).toISOString();

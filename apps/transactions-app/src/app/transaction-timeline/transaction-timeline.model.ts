@@ -11,7 +11,12 @@ export interface Transaction {
   };
 }
 
+export interface GroupedTransaction {
+  name: string;
+  amountInEur: number;
+}
+
 export interface GroupedTransactions {
   date: string;
-  transactions: { name: string; amountInEur: number }[];
+  transactions: GroupedTransaction[];
 }
