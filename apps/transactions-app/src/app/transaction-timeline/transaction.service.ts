@@ -17,7 +17,6 @@ export class TransactionService {
       .get<{ days: TransactionDay[] }>('http://localhost:8080/api/transactions')
       .pipe(
         map((data) => {
-          console.log(data);
           return data.days.flatMap((day) =>
             day.transactions.map((tx) => ({
               ...tx,

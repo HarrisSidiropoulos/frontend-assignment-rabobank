@@ -13,7 +13,9 @@ export interface Transaction {
 
 export interface GroupedTransaction {
   name: string;
-  amountInEur: number;
+  amount: number;
+  currencyCode: 'EUR' | 'USD';
+  currencyRate: number;
 }
 
 export interface GroupedTransactions {
