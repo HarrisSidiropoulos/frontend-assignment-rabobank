@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npx nx run transactions-app:serve --configuration=development",
-    "start-prod": "npx nx run transactions-app:serve --configuration=production",
+    "start": "nx run-many --parallel -t serve --projects=backend-app,transactions-app",
+    "start-prod": "nx run-many --parallel -t serve --projects=backend-app,transactions-app --configuration=production",
     "build": "npx nx run transactions-app:build --configuration=production",
     "test": "npx nx run-many --target=test",
     "lint": "npx nx run-many --target=lint",
