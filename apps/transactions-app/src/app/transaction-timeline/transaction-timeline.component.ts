@@ -43,7 +43,7 @@ export class TransactionTimelineComponent implements OnInit {
     const grouped = new Map<string, GroupedTransaction[]>();
 
     this.transactions.forEach((tx) => {
-      const date = new Date(tx.timestamp).toISOString();
+      const date = new Date(tx.timestamp).toDateString();
       const amountInEur =
         tx.currencyCode === 'EUR'
           ? tx.amount
