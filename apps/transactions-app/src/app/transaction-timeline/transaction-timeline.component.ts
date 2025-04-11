@@ -6,14 +6,13 @@ import type {
 } from './transaction-timeline.model';
 import { TransactionService } from './transaction.service';
 import { CommonModule, NgFor } from '@angular/common';
-import { ConvertToEuroPipe } from './convert-to-euro.pipe';
 
 @Component({
   selector: 'app-transaction-timeline',
   templateUrl: './transaction-timeline.component.html',
   styleUrls: ['./transaction-timeline.component.scss'],
   providers: [TransactionService],
-  imports: [NgFor, CommonModule, ConvertToEuroPipe],
+  imports: [NgFor, CommonModule],
 })
 export class TransactionTimelineComponent implements OnInit {
   @Input() usdToEurRate = 0.9;
@@ -45,6 +44,10 @@ export class TransactionTimelineComponent implements OnInit {
 
     this.transactions.forEach((tx) => {
       const date = new Date(tx.timestamp).toDateString();
+      const amountInEur =
+        tx.currencyCode === 'EUR'
+          ? tx.amount
+          : tx.amount / (tx?.currencyRate ?? 1);
 
       if (!grouped.has(date)) {
         grouped.set(date, []);
@@ -52,9 +55,7 @@ export class TransactionTimelineComponent implements OnInit {
 
       grouped.get(date)?.push({
         name: tx.otherParty?.name ?? 'Unknown',
-        amount: tx.amount,
-        currencyCode: tx.currencyCode,
-        currencyRate: tx.currencyRate ?? 1,
+        amountInEur,
       });
     });
 
