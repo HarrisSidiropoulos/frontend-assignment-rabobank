@@ -10,10 +10,4 @@ import { Transaction } from '../transaction-timeline/transaction-timeline.model'
 })
 export class TransactionComponent {
   @Input({ required: true }) transaction!: Transaction;
-
-  get formattedDate(): string {
-    return this.transaction
-      ? new Date(this.transaction.timestamp).toLocaleString()
-      : '';
-  }
 }
