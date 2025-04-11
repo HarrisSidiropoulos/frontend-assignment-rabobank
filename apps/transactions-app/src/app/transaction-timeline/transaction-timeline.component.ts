@@ -1,8 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import type { GroupedTransactions } from './transaction-timeline.model';
 import { TransactionService } from './transaction.service';
 import { CommonModule, NgFor } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-timeline',
@@ -11,13 +10,6 @@ import { ActivatedRoute } from '@angular/router';
   providers: [TransactionService],
   imports: [NgFor, CommonModule],
 })
-export class TransactionTimelineComponent implements OnInit {
-  groupedTransactions: GroupedTransactions[] = [];
-  route = inject(ActivatedRoute);
-
-  ngOnInit() {
-    this.route.data.subscribe(({ groupedTransactions }) => {
-      this.groupedTransactions = groupedTransactions;
-    });
-  }
+export class TransactionTimelineComponent {
+  @Input() groupedTransactions: GroupedTransactions[] = [];
 }
