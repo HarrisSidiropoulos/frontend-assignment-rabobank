@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { TransactionService } from './transaction.service';
 import type {
   GroupedTransaction,
   GroupedTransactions,
-} from './transaction-timeline.model';
+} from '../common/transaction.model';
+import { TransactionService } from '../common/transaction.service';
 
 export const resolveGroupedTransactions: ResolveFn<
   GroupedTransactions[]

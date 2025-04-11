@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { map } from 'rxjs/operators';
-import type { Transaction } from '../transaction-timeline/transaction-timeline.model';
-import { TransactionService } from '../transaction-timeline/transaction.service';
+import type { Transaction } from '../common/transaction.model';
+import { TransactionService } from '../common/transaction.service';
 
 export const resolveTransaction: ResolveFn<Transaction> = (route) => {
   const transactionService = inject(TransactionService);

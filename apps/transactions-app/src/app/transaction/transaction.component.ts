@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Transaction } from '../transaction-timeline/transaction-timeline.model';
+import { Transaction } from '../common/transaction.model';
 
 @Component({
   selector: 'app-transaction',

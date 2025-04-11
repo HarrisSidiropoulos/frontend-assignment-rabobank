@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import type { GroupedTransactions } from './transaction-timeline.model';
+import type { GroupedTransactions } from '../common/transaction.model';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
