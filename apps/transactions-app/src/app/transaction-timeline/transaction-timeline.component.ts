@@ -1,11 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import type {
-  GroupedTransaction,
-  GroupedTransactions,
-  Transaction,
-} from './transaction-timeline.model';
+import type { GroupedTransactions } from './transaction-timeline.model';
 import { TransactionService } from './transaction.service';
 import { CommonModule, NgFor } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-timeline',
@@ -15,49 +12,12 @@ import { CommonModule, NgFor } from '@angular/common';
   imports: [NgFor, CommonModule],
 })
 export class TransactionTimelineComponent implements OnInit {
-  transactions: Transaction[] = [];
-  loading = true;
-  transactionService = inject(TransactionService);
   groupedTransactions: GroupedTransactions[] = [];
+  route = inject(ActivatedRoute);
 
-  ngOnInit(): void {
-    this.loading = true;
-
-    this.transactionService.getAllTransactions().subscribe({
-      next: (txs) => {
-        this.transactions = txs;
-        this.groupAndSortTransactions();
-        this.loading = false;
-      },
-      error: (e) => {
-        console.log('error', e);
-        this.loading = false;
-      },
+  ngOnInit() {
+    this.route.data.subscribe(({ groupedTransactions }) => {
+      this.groupedTransactions = groupedTransactions;
     });
-  }
-
-  private groupAndSortTransactions(): void {
-    const grouped = new Map<string, GroupedTransaction[]>();
-
-    this.transactions.forEach((tx) => {
-      const date = new Date(tx.timestamp).toDateString();
-      const amountInEur =
-        tx.currencyCode === 'EUR'
-          ? tx.amount
-          : tx.amount / (tx?.currencyRate ?? 1);
-
-      if (!grouped.has(date)) {
-        grouped.set(date, []);
-      }
-
-      grouped.get(date)?.push({
-        name: tx.otherParty?.name ?? 'Unknown',
-        amountInEur,
-      });
-    });
-
-    this.groupedTransactions = Array.from(grouped.entries())
-      .map(([date, transactions]) => ({ date, transactions }))
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 }
