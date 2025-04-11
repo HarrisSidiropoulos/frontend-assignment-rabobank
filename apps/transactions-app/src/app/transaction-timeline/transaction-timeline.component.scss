@@ -22,6 +22,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      text-decoration: none;
+
+      &:hover {
+        background: #e0e0e0;
+      }
 
       .party-name {
         font-weight: 500;
