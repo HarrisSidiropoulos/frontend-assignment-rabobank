@@ -17,6 +17,6 @@
   <p><strong>Description:</strong> {{ transaction.description }}</p>
 
   <h3>Other Party</h3>
-  <p><strong>Name:</strong> {{ transaction.otherParty?.name }}</p>
-  <p><strong>IBAN:</strong> {{ transaction.otherParty?.iban }}</p>
+  <p><strong>Name:</strong> {{ transaction.otherParty?.name ?? 'Unknown' }}</p>
+  <p><strong>IBAN:</strong> {{ transaction.otherParty?.iban ?? 'Unknown' }}</p>
 </div>
