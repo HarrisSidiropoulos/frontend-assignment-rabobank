@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import type {
   GroupedTransaction,
   GroupedTransactions,
@@ -15,12 +15,9 @@ import { CommonModule, NgFor } from '@angular/common';
   imports: [NgFor, CommonModule],
 })
 export class TransactionTimelineComponent implements OnInit {
-  @Input() usdToEurRate = 0.9;
-
   transactions: Transaction[] = [];
   loading = true;
   transactionService = inject(TransactionService);
-
   groupedTransactions: GroupedTransactions[] = [];
 
   ngOnInit(): void {
