@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import type { Transaction } from './transaction-timeline.model';
+import { Transaction } from './transaction.model';
 
 export interface TransactionDay {
   id: string;

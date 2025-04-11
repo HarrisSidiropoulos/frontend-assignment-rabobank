@@ -14,7 +14,8 @@ export interface Transaction {
 export interface GroupedTransaction {
   id: string;
   name: string;
-  amountInEur: number;
+  amount: number;
+  currencyRate: number;
 }
 
 export interface GroupedTransactions {

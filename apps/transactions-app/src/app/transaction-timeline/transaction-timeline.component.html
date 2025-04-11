@@ -7,7 +7,9 @@
       class="timeline-item"
     >
       <span class="party-name">{{ tx.name }}</span>
-      <span class="amount">{{ tx.amountInEur | currency : 'EUR' }}</span>
+      <span class="amount">{{
+        tx.amount | convertInEur : tx.currencyRate | currency : 'EUR'
+      }}</span>
     </a>
   </div>
 </div>

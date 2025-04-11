@@ -18,10 +18,6 @@ export const resolveGroupedTransactions: ResolveFn<
 
       transactions.forEach((tx) => {
         const date = new Date(tx.timestamp).toISOString().slice(0, 10);
-        const amountInEur =
-          tx.currencyCode === 'EUR'
-            ? tx.amount
-            : tx.amount / (tx?.currencyRate ?? 1);
 
         if (!grouped.has(date)) {
           grouped.set(date, []);
@@ -30,7 +26,8 @@ export const resolveGroupedTransactions: ResolveFn<
         grouped.get(date)?.push({
           id: tx.id.toString(),
           name: tx.otherParty?.name ?? 'Unknown',
-          amountInEur,
+          amount: tx.amount,
+          currencyRate: tx.currencyRate ?? 1,
         });
       });
 
