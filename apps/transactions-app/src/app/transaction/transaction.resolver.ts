@@ -10,14 +10,12 @@ export const resolveTransaction: ResolveFn<Transaction> = (route) => {
 
   return transactionService.getAllTransactions().pipe(
     map((transactions) => {
-      return (
-        transactions.filter((tx) => {
-          const transactionDate = new Date(tx.timestamp)
-            .toISOString()
-            .slice(0, 10);
-          return transactionDate === date && tx.id.toString() === id;
-        })?.[0] ?? {}
-      );
+      return transactions.filter((tx) => {
+        const transactionDate = new Date(tx.timestamp)
+          .toISOString()
+          .slice(0, 10);
+        return transactionDate === date && tx.id.toString() === id;
+      })?.[0];
     })
   );
 };
