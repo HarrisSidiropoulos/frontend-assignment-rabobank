@@ -1,4 +1,4 @@
-<div *ngIf="transaction" class="transaction-detail">
+<div *ngIf="transaction?.id" class="transaction-detail">
   <h2>Transaction Detail</h2>
   <p><strong>ID:</strong> {{ transaction.id }}</p>
   <p><strong>Date:</strong> {{ transaction.timestamp | date }}</p>
@@ -19,4 +19,9 @@
   <h3>Other Party</h3>
   <p><strong>Name:</strong> {{ transaction.otherParty?.name ?? 'Unknown' }}</p>
   <p><strong>IBAN:</strong> {{ transaction.otherParty?.iban ?? 'Unknown' }}</p>
+</div>
+<div *ngIf="!transaction.id" class="transaction-detail">
+  <h2>Transaction Not Found</h2>
+  <p>The requested transaction could not be found.</p>
+  <p>Please check the transaction ID and try again.</p>
 </div>

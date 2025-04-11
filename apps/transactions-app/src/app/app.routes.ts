@@ -3,6 +3,7 @@ import { TransactionTimelineComponent } from './transaction-timeline/transaction
 import { resolveGroupedTransactions } from './transaction-timeline/grouped-transactions.resolver';
 import { TransactionComponent } from './transaction/transaction.component';
 import { resolveTransaction } from './transaction/transaction.resolver';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const appRoutes: Route[] = [
   {
@@ -18,5 +19,9 @@ export const appRoutes: Route[] = [
     resolve: {
       transaction: resolveTransaction,
     },
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
