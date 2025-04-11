@@ -17,7 +17,7 @@ export const resolveGroupedTransactions: ResolveFn<
       const grouped = new Map<string, GroupedTransaction[]>();
 
       transactions.forEach((tx) => {
-        const date = new Date(tx.timestamp).toDateString();
+        const date = new Date(tx.timestamp).toISOString().slice(0, 10);
         const amountInEur =
           tx.currencyCode === 'EUR'
             ? tx.amount
