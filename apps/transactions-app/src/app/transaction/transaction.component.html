@@ -1,0 +1,14 @@
+<div *ngIf="transaction" class="transaction-detail">
+  <h2>Transaction Detail</h2>
+  <p><strong>ID:</strong> {{ transaction.id }}</p>
+  <p><strong>Date:</strong> {{ formattedDate | date }}</p>
+  <p>
+    <strong>Amount:</strong>
+    {{ transaction.amount | currency : transaction.currencyCode }}
+  </p>
+  <p><strong>Description:</strong> {{ transaction.description }}</p>
+
+  <h3>Other Party</h3>
+  <p><strong>Name:</strong> {{ transaction.otherParty?.name }}</p>
+  <p><strong>IBAN:</strong> {{ transaction.otherParty?.iban }}</p>
+</div>

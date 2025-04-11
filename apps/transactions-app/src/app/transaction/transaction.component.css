@@ -1,0 +1,11 @@
+.transaction-detail {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-width: 400px;
+  background: #f9f9f9;
+}
+.transaction-detail h2,
+.transaction-detail h3 {
+  margin-top: 0;
+}
