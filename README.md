@@ -10,16 +10,18 @@ Before setting up the project, ensure you have the following installed:
 - [npm](https://www.npmjs.com/) (comes with Node.js)
 - [Nx CLI](https://nx.dev/) (optional, for running Nx commands globally)
 
-````bash
+```bash
 npm install -g nx
+```
 
 ## Setup
+
 1. Clone the repository:
 
 ```bash
 git clone https://github.com/HarrisSidiropoulos/frontend-assignment-rabobank.git
 cd frontend-assignment-rabobank
-````
+```
 
 2. Install dependencies:
 
