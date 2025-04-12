@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+
 import { Transaction } from '../shared/transaction.model';
 import { CovertInEurPipe } from '../shared/covert-in-eur.pipe';
 import { CardComponent } from '../shared/ui/card/card.component';

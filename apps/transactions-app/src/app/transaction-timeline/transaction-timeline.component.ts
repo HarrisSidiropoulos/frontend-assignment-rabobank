@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import type { GroupedTransactions } from '../shared/transaction.model';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
+
+import type { GroupedTransactions } from '../shared/transaction.model';
 import { CovertInEurPipe } from '../shared/covert-in-eur.pipe';
 import { CardComponent } from '../shared/ui/card/card.component';
 

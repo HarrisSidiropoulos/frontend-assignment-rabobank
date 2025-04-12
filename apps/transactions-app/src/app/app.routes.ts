@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+
 import { TransactionTimelineComponent } from './transaction-timeline/transaction-timeline.component';
 import { resolveGroupedTransactions } from './transaction-timeline/grouped-transactions.resolver';
 import { TransactionComponent } from './transaction/transaction.component';

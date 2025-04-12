@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
+
 import type { Transaction } from '../shared/transaction.model';
 import { TransactionService } from '../shared/transaction.service';
 
