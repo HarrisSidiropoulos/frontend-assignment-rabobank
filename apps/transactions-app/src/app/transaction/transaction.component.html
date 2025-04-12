@@ -1,5 +1,6 @@
+<a [routerLink]="['/']" class="back-link">← Back to Transactions</a>
+
 <app-card *ngIf="transaction">
-  <a [routerLink]="['/']" class="back-link">← Back to Transactions</a>
   <header>
     <h2>Transaction Detail</h2>
   </header>
@@ -58,6 +59,8 @@
   <header>
     <h2>Transaction Not Found</h2>
   </header>
-  <p>The requested transaction could not be found.</p>
-  <p>Please check the transaction ID and try again.</p>
+  <p>
+    The requested transaction could not be found. Please check the transaction
+    ID and try again.
+  </p>
 </app-card>
