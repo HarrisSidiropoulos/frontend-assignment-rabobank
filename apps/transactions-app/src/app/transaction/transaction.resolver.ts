@@ -10,12 +10,5 @@ export const resolveTransaction: ResolveFn<Transaction | undefined> = (
   const transactionService = inject(TransactionService);
   const { date, id } = route.params;
 
-  return transactionService.getAllTransactions().pipe(
-    map((transactions) =>
-      transactions.find((tx) => {
-        const txDate = new Date(tx.timestamp).toISOString().slice(0, 10);
-        return txDate === date && tx.id.toString() === id;
-      })
-    )
-  );
+  return transactionService.getTransactionByDateAndId(date, id);
 };

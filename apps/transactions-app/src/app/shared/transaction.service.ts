@@ -19,7 +19,7 @@ export class TransactionService {
 
   private transactionsCache$: Observable<Transaction[]> | null = null;
 
-  getAllTransactions(): Observable<Transaction[]> {
+  private get transactions$(): Observable<Transaction[]> {
     if (!this.transactionsCache$) {
       this.transactionsCache$ = this.http
         .get<TransactionResponse>(`${environment.apiUrl}/transactions`)
@@ -33,6 +33,24 @@ export class TransactionService {
         );
     }
     return this.transactionsCache$;
+  }
+
+  getAllTransactions(): Observable<Transaction[]> {
+    return this.transactions$;
+  }
+
+  getTransactionByDateAndId(
+    date: string,
+    id: string
+  ): Observable<Transaction | undefined> {
+    return this.transactions$.pipe(
+      map((transactions) =>
+        transactions.find((tx) => {
+          const txDate = new Date(tx.timestamp).toISOString().slice(0, 10);
+          return txDate === date && tx.id.toString() === id;
+        })
+      )
+    );
   }
 
   private flattenTransactions(response: TransactionResponse): Transaction[] {
