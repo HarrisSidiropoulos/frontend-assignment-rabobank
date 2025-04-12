@@ -1,27 +1,62 @@
-<div *ngIf="transaction" class="transaction-detail">
-  <h2>Transaction Detail</h2>
-  <p><strong>ID:</strong> {{ transaction.id }}</p>
-  <p><strong>Date:</strong> {{ transaction.timestamp | date }}</p>
-  <p>
-    <strong>Amount:</strong>
-    {{ transaction.amount | currency : transaction.currencyCode }}
-  </p>
-  <p *ngIf="transaction.currencyCode !== 'EUR'">
-    <strong>Amount In Euro:</strong>
-    {{
-      transaction.amount
-        | convertInEur : transaction.currencyRate
-        | currency : 'EUR'
-    }}
-  </p>
-  <p><strong>Description:</strong> {{ transaction.description }}</p>
+<section *ngIf="transaction" class="transaction-detail">
+  <header>
+    <h2>Transaction Detail</h2>
+  </header>
+  <dl>
+    <div>
+      <dt>ID:</dt>
+      <dd>{{ transaction.id }}</dd>
+    </div>
 
-  <h3>Other Party</h3>
-  <p><strong>Name:</strong> {{ transaction.otherParty?.name ?? 'Unknown' }}</p>
-  <p><strong>IBAN:</strong> {{ transaction.otherParty?.iban ?? 'Unknown' }}</p>
-</div>
-<div *ngIf="!transaction" class="transaction-detail">
-  <h2>Transaction Not Found</h2>
+    <div>
+      <dt>Date:</dt>
+      <dd>{{ transaction.timestamp | date }}</dd>
+    </div>
+
+    <div>
+      <dt>Amount:</dt>
+      <dd>{{ transaction.amount | currency : transaction.currencyCode }}</dd>
+    </div>
+
+    <div>
+      <dt *ngIf="transaction.currencyCode !== 'EUR'">Amount In Euro:</dt>
+      <dd *ngIf="transaction.currencyCode !== 'EUR'">
+        {{
+          transaction.amount
+            | convertInEur : transaction.currencyRate
+            | currency : 'EUR'
+        }}
+      </dd>
+    </div>
+
+    <div>
+      <dt>Description:</dt>
+      <dd>{{ transaction.description }}</dd>
+    </div>
+  </dl>
+
+  <section>
+    <header>
+      <h3>Other Party</h3>
+    </header>
+    <dl>
+      <div>
+        <dt>Name:</dt>
+        <dd>{{ transaction.otherParty?.name ?? 'Unknown' }}</dd>
+      </div>
+
+      <div>
+        <dt>IBAN:</dt>
+        <dd>{{ transaction.otherParty?.iban ?? 'Unknown' }}</dd>
+      </div>
+    </dl>
+  </section>
+</section>
+
+<section *ngIf="!transaction" class="transaction-detail">
+  <header>
+    <h2>Transaction Not Found</h2>
+  </header>
   <p>The requested transaction could not be found.</p>
   <p>Please check the transaction ID and try again.</p>
-</div>
+</section>

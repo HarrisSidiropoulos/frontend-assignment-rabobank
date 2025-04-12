@@ -1,15 +1,17 @@
-<div class="timeline">
-  <div *ngFor="let group of groupedTransactions" class="timeline-group">
-    <div class="timeline-date">{{ group.date | date : 'fullDate' }}</div>
-    <a
-      *ngFor="let tx of group.transactions"
-      [routerLink]="[group.date | date : 'yyyy-MM-dd', tx.id]"
-      class="timeline-item"
-    >
-      <span class="party-name">{{ tx.name }}</span>
-      <span class="amount">{{
-        tx.amount | convertInEur : tx.currencyRate | currency : 'EUR'
-      }}</span>
-    </a>
-  </div>
-</div>
+<section class="timeline">
+  <section *ngFor="let group of groupedTransactions" class="timeline-group">
+    <header class="timeline-date">{{ group.date | date : 'fullDate' }}</header>
+    <nav>
+      <article
+        *ngFor="let tx of group.transactions"
+        [routerLink]="[group.date | date : 'yyyy-MM-dd', tx.id]"
+        class="timeline-item"
+      >
+        <span class="party-name">{{ tx.name }}</span>
+        <span class="amount">{{
+          tx.amount | convertInEur : tx.currencyRate | currency : 'EUR'
+        }}</span>
+      </article>
+    </nav>
+  </section>
+</section>
