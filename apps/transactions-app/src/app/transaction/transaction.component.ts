@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Transaction } from '../common/transaction.model';
-import { CovertInEurPipe } from '../common/covert-in-eur.pipe';
+import { Transaction } from '../shared/transaction.model';
+import { CovertInEurPipe } from '../shared/covert-in-eur.pipe';
 import { RouterLink } from '@angular/router';
 
 @Component({

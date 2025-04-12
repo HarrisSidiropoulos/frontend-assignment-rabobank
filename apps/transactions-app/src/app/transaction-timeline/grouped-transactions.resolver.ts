@@ -4,8 +4,8 @@ import { map } from 'rxjs/operators';
 import type {
   GroupedTransaction,
   GroupedTransactions,
-} from '../common/transaction.model';
-import { TransactionService } from '../common/transaction.service';
+} from '../shared/transaction.model';
+import { TransactionService } from '../shared/transaction.service';
 
 export const resolveGroupedTransactions: ResolveFn<
   GroupedTransactions[]

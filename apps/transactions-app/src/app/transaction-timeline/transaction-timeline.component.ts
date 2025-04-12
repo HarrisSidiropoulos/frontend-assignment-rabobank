@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import type { GroupedTransactions } from '../common/transaction.model';
+import type { GroupedTransactions } from '../shared/transaction.model';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { CovertInEurPipe } from '../common/covert-in-eur.pipe';
+import { CovertInEurPipe } from '../shared/covert-in-eur.pipe';
 
 @Component({
   selector: 'app-transaction-timeline',
