@@ -17,16 +17,23 @@ interface TransactionResponse {
 export class TransactionService {
   http = inject(HttpClient);
 
-  private transactions$ = this.http
-    .get<TransactionResponse>(`${environment.apiUrl}/transactions`)
-    .pipe(
-      map(this.flattenTransactions),
-      shareReplay(1),
-      catchError((err) => {
-        console.error('Error fetching transactions', err);
-        return of([]);
-      })
-    );
+  private transactionsCache$: Observable<Transaction[]> | null = null;
+
+  private get transactions$(): Observable<Transaction[]> {
+    if (!this.transactionsCache$) {
+      this.transactionsCache$ = this.http
+        .get<TransactionResponse>(`${environment.apiUrl}/transactions`)
+        .pipe(
+          map(this.flattenTransactions),
+          shareReplay(1),
+          catchError((err) => {
+            console.error('Error fetching transactions', err);
+            return of([]);
+          })
+        );
+    }
+    return this.transactionsCache$;
+  }
 
   getAllTransactions(): Observable<Transaction[]> {
     return this.transactions$;
