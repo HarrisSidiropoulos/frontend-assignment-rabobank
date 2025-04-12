@@ -6,7 +6,7 @@ import { CovertInEurPipe } from '../common/covert-in-eur.pipe';
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
-  styleUrls: ['./transaction.component.css'],
+  styleUrls: ['./transaction.component.scss'],
   imports: [CommonModule, CovertInEurPipe],
 })
 export class TransactionComponent {
