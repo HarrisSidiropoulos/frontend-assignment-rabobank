@@ -19,7 +19,7 @@ export class TransactionService {
 
   private transactionsCache$: Observable<Transaction[]> | null = null;
 
-  private get transactions$(): Observable<Transaction[]> {
+  getAllTransactions(): Observable<Transaction[]> {
     if (!this.transactionsCache$) {
       this.transactionsCache$ = this.http
         .get<TransactionResponse>(`${environment.apiUrl}/transactions`)
@@ -33,10 +33,6 @@ export class TransactionService {
         );
     }
     return this.transactionsCache$;
-  }
-
-  getAllTransactions(): Observable<Transaction[]> {
-    return this.transactions$;
   }
 
   private flattenTransactions(response: TransactionResponse): Transaction[] {
