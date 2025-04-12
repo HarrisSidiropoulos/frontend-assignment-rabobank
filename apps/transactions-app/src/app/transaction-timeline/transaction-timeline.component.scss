@@ -1,58 +1,51 @@
-.timeline {
-  padding: 2rem;
-  margin: 0 auto;
+.timeline-group {
+  margin-bottom: 2rem;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 
-  .timeline-group {
-    margin-bottom: 2rem;
+  .timeline-date {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+
+  .timeline-item {
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #ecf0f1;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease-in-out;
 
-    .timeline-date {
-      font-size: 1rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: #2c3e50;
+    &:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      background: #f9f9f9;
     }
 
-    .timeline-item {
-      cursor: pointer;
-      background: #fff;
-      border: 1px solid #ecf0f1;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.2s ease-in-out;
+    .party-name {
+      font-weight: 600;
+      color: #34495e;
+    }
 
-      &:hover {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        background: #f9f9f9;
-      }
+    .amount {
+      font-weight: 600;
+      color: #2ecc71;
+      white-space: nowrap;
 
-      .party-name {
-        font-weight: 600;
-        color: #34495e;
-      }
-
-      .amount {
-        font-weight: 600;
+      &.positive {
         color: #2ecc71;
-        white-space: nowrap;
-
-        &.positive {
-          color: #2ecc71;
-        }
-        
-        &.negative {
-          color: #e74c3c;
-        }
+      }
+      
+      &.negative {
+        color: #e74c3c;
       }
     }
   }
