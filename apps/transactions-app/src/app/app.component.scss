@@ -1,9 +1,11 @@
 main {
   font-family: 'Arial', sans-serif;
-  h1 {
-    padding: 2rem;
+  .container {
     max-width: 700px;
     margin: 0 auto;
     position: relative;
+  }
+  h1 {
+    padding: 2rem;
   }
 }
