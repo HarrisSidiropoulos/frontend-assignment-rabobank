@@ -8,9 +8,16 @@
         class="timeline-item"
       >
         <span class="party-name">{{ tx.name }}</span>
-        <span class="amount">{{
-          tx.amount | convertInEur : tx.currencyRate | currency : 'EUR'
-        }}</span>
+        <span
+          class="amount"
+          [ngClass]="{
+            positive: tx.amount >= 0,
+            negative: tx.amount < 0
+          }"
+          >{{
+            tx.amount | convertInEur : tx.currencyRate | currency : 'EUR'
+          }}</span
+        >
       </article>
     </nav>
   </section>
