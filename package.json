@@ -1,7 +1,12 @@
 {
-  "name": "@angular-monorepo/source",
+  "name": "frontend-assignment-rabobank",
   "version": "0.0.0",
   "license": "MIT",
+  "author": "Harris Sidiropoulos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HarrisSidiropoulos/frontend-assignment-rabobank.git"
+  },
   "scripts": {
     "start": "nx run-many --parallel -t serve --projects=backend-app,transactions-app",
     "start-prod": "nx run-many --parallel -t serve --projects=backend-app,transactions-app --configuration=production",
