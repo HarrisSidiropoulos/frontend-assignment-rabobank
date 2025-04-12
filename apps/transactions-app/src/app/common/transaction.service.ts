@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay, catchError, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Transaction } from './transaction.model';
 
 export interface TransactionDay {
@@ -8,23 +9,35 @@ export interface TransactionDay {
   transactions: Transaction[];
 }
 
+interface TransactionResponse {
+  days: TransactionDay[];
+}
+
 @Injectable({ providedIn: 'root' })
 export class TransactionService {
-  constructor(private http: HttpClient) {}
+  http = inject(HttpClient);
+
+  private transactions$ = this.http
+    .get<TransactionResponse>(`${environment.apiUrl}/transactions`)
+    .pipe(
+      map(this.flattenTransactions),
+      shareReplay(1),
+      catchError((err) => {
+        console.error('Error fetching transactions', err);
+        return of([]);
+      })
+    );
 
   getAllTransactions(): Observable<Transaction[]> {
-    return this.http
-      .get<{ days: TransactionDay[] }>('http://localhost:8080/api/transactions')
-      .pipe(
-        map((data) => {
-          return data.days.flatMap((day) =>
-            day.transactions.map((tx) => ({
-              ...tx,
-              timestamp: tx.timestamp,
-              currencyRate: tx.currencyRate ?? 1,
-            }))
-          );
-        })
-      );
+    return this.transactions$;
+  }
+
+  private flattenTransactions(response: TransactionResponse): Transaction[] {
+    return response.days.flatMap((day) =>
+      day.transactions.map((tx) => ({
+        ...tx,
+        currencyRate: tx.currencyRate ?? 1,
+      }))
+    );
   }
 }
