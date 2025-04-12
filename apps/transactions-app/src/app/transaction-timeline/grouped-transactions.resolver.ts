@@ -14,24 +14,25 @@ export const resolveGroupedTransactions: ResolveFn<
 
   return transactionService.getAllTransactions().pipe(
     map((transactions) => {
-      const grouped = new Map<string, GroupedTransaction[]>();
+      const groupedMap = transactions.reduce<Map<string, GroupedTransaction[]>>(
+        (map, tx) => {
+          const dateKey = new Date(tx.timestamp).toISOString().slice(0, 10);
 
-      transactions.forEach((tx) => {
-        const date = new Date(tx.timestamp).toISOString().slice(0, 10);
+          const txGroup = map.get(dateKey) ?? [];
+          txGroup.push({
+            id: tx.id.toString(),
+            name: tx.otherParty?.name ?? 'Unknown',
+            amount: tx.amount,
+            currencyRate: tx.currencyRate ?? 1,
+          });
 
-        if (!grouped.has(date)) {
-          grouped.set(date, []);
-        }
+          map.set(dateKey, txGroup);
+          return map;
+        },
+        new Map()
+      );
 
-        grouped.get(date)?.push({
-          id: tx.id.toString(),
-          name: tx.otherParty?.name ?? 'Unknown',
-          amount: tx.amount,
-          currencyRate: tx.currencyRate ?? 1,
-        });
-      });
-
-      return Array.from(grouped.entries())
+      return Array.from(groupedMap.entries())
         .map(([date, transactions]) => ({ date, transactions }))
         .sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
