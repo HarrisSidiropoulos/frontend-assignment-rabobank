@@ -29,7 +29,7 @@ cd frontend-assignment-rabobank
 npm install
 ```
 
-3. Start the development server:
+3. Start the development server (frontend, backend):
 
 ```bash
 npm start
