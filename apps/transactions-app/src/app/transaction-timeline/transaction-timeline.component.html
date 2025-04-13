@@ -6,6 +6,7 @@
         *ngFor="let tx of group.transactions"
         [routerLink]="[group.date | date : 'yyyy-MM-dd', tx.id]"
         class="timeline-item"
+        [title]="[`View ${tx.name} transaction details`]"
       >
         <span class="party-name">{{ tx.name }}</span>
         <span
