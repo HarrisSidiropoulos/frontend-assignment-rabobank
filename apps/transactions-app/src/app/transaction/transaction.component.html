@@ -1,55 +1,41 @@
 <app-card *ngIf="transaction">
   <app-back-link link="/">Back to Transactions</app-back-link>
   <header>
-    <h2>Transaction Detail</h2>
+    <h2 id="transaction-detail-header">Transaction Detail</h2>
   </header>
-  <dl>
-    <div>
-      <dt>ID:</dt>
-      <dd>{{ transaction.id }}</dd>
-    </div>
+  <dl aria-labelledby="transaction-detail-header">
+    <dt>ID:</dt>
+    <dd>{{ transaction.id }}</dd>
 
-    <div>
-      <dt>Date:</dt>
-      <dd>{{ transaction.timestamp | date }}</dd>
-    </div>
+    <dt>Date:</dt>
+    <dd>{{ transaction.timestamp | date }}</dd>
 
-    <div>
-      <dt>Amount:</dt>
-      <dd>{{ transaction.amount | currency : transaction.currencyCode }}</dd>
-    </div>
+    <dt>Amount:</dt>
+    <dd>{{ transaction.amount | currency : transaction.currencyCode }}</dd>
 
-    <div>
-      <dt *ngIf="transaction.currencyCode !== 'EUR'">Amount In Euro:</dt>
-      <dd *ngIf="transaction.currencyCode !== 'EUR'">
-        {{
-          transaction.amount
-            | convertInEur : transaction.currencyRate
-            | currency : 'EUR'
-        }}
-      </dd>
-    </div>
+    <dt *ngIf="transaction.currencyCode !== 'EUR'">Amount In Euro:</dt>
+    <dd *ngIf="transaction.currencyCode !== 'EUR'">
+      {{
+        transaction.amount
+          | convertInEur : transaction.currencyRate
+          | currency : 'EUR'
+      }}
+    </dd>
 
-    <div>
-      <dt>Description:</dt>
-      <dd>{{ transaction.description }}</dd>
-    </div>
+    <dt>Description:</dt>
+    <dd>{{ transaction.description }}</dd>
   </dl>
 
   <section *ngIf="transaction.otherParty">
     <header>
-      <h3>Other Party</h3>
+      <h3 id="other-party-header">Other Party</h3>
     </header>
-    <dl>
-      <div>
-        <dt>Name:</dt>
-        <dd>{{ transaction.otherParty.name }}</dd>
-      </div>
+    <dl aria-labelledby="other-party-header">
+      <dt>Name:</dt>
+      <dd>{{ transaction.otherParty.name }}</dd>
 
-      <div>
-        <dt>IBAN:</dt>
-        <dd>{{ transaction.otherParty.iban }}</dd>
-      </div>
+      <dt>IBAN:</dt>
+      <dd>{{ transaction.otherParty.iban }}</dd>
     </dl>
   </section>
 </app-card>
@@ -57,9 +43,9 @@
 <app-card *ngIf="!transaction">
   <app-back-link link="/">Back to Transactions</app-back-link>
   <header>
-    <h2>Transaction Not Found</h2>
+    <h2 id="transaction-not-found-header">Transaction Not Found</h2>
   </header>
-  <p>
+  <p aria-labelledby="transaction-not-found-header">
     The requested transaction could not be found. Please check the transaction
     ID and try again.
   </p>
