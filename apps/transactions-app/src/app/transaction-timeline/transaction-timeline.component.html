@@ -2,7 +2,7 @@
   <section *ngFor="let group of groupedTransactions" class="timeline-group">
     <header class="timeline-date">{{ group.date | date : 'fullDate' }}</header>
     <nav>
-      <article
+      <a
         *ngFor="let tx of group.transactions"
         [routerLink]="[group.date | date : 'yyyy-MM-dd', tx.id]"
         class="timeline-item"
@@ -18,7 +18,7 @@
             tx.amount | convertInEur : tx.currencyRate | currency : 'EUR'
           }}</span
         >
-      </article>
+      </a>
     </nav>
   </section>
 </app-card>
